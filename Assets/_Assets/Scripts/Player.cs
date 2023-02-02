@@ -1,43 +1,53 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public static Player Instance { get; private set; }
+
     [SerializeField] private float speed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask layerMask;
 
+    public event EventHandler<OnSelectCounterChangedArgs> OnSelectCounterChanged;
+    public class OnSelectCounterChangedArgs : EventArgs {
+        public ClearCounter selectedCounter;
+    }
+
     private Vector2 moveDir;
     private bool isWalking;
     private bool isCanMove;
-    private float playerHeight = 2f;
-    private float playerRadius = 0.7f;
+    private readonly float playerHeight = 2f;
+    private readonly float playerRadius = 0.7f;
     private float moveDistance;
-    private float interactDistance = 2f;
+    private readonly float interactDistance = 2f;
     private Vector3 previousDir;
+    private ClearCounter selectedCounter;
 
-    public bool IsWalking { get => isWalking;}
+    public bool IsWalking { get => isWalking; }
+
+    private void Awake() {
+        if (Instance != null) {
+            Debug.LogError("There is something wrong");
+        }
+        Instance = this;
+    }
 
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
-        moveDir = gameInput.GetNomalizedDirVector();
-
-        if (moveDir != Vector2.zero) {
-            previousDir = new(moveDir.x, 0, moveDir.y);
-        }
-
-        if (Physics.Raycast(transform.position, previousDir, out RaycastHit raycastHit, interactDistance, layerMask)) {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                Debug.Log(clearCounter.transform);
-            }
+        if (selectedCounter != null) {
+            selectedCounter.Interact();
+        } else {
+            Debug.Log("Null counter");
         }
     }
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         HandleMovement();
-        //HandleInteraction();
+        HandleInteraction();
     }
 
     private void HandleInteraction() {
@@ -47,9 +57,18 @@ public class Player : MonoBehaviour {
 
         if (Physics.Raycast(transform.position, previousDir, out RaycastHit raycastHit, interactDistance, layerMask)) {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                Debug.Log(clearCounter.transform);
+                SetSelectedCounter(clearCounter);
+            } else {
+                SetSelectedCounter(null);
             }
+        } else {
+            SetSelectedCounter(null);
         }
+    }
+
+    private void SetSelectedCounter(ClearCounter clearCounter) {
+        selectedCounter = clearCounter;
+        OnSelectCounterChanged?.Invoke(this, new OnSelectCounterChangedArgs { selectedCounter = selectedCounter });
     }
 
     private void HandleMovement() {
