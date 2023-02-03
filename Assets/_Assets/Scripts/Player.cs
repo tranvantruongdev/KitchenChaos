@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IKitchenObjcectParent {
     public static Player Instance { get; private set; }
 
     [SerializeField] private float speed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Transform spamPoint;
 
     public event EventHandler<OnSelectCounterChangedArgs> OnSelectCounterChanged;
     public class OnSelectCounterChangedArgs : EventArgs {
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour {
     private readonly float interactDistance = 2f;
     private Vector3 previousDir;
     private ClearCounter selectedCounter;
+    private KitchenObject kitchenObject;
 
     public bool IsWalking { get => isWalking; }
 
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour {
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (selectedCounter != null) {
-            selectedCounter.Interact();
+            selectedCounter.Interact(this);
         } else {
             Debug.Log("Null counter");
         }
@@ -101,5 +103,25 @@ public class Player : MonoBehaviour {
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotationSpeed * Time.deltaTime);
 
         isWalking = moveDir != Vector3.zero;
+    }
+
+    public void ClearKitchenObject() {
+        kitchenObject = null;
+    }
+
+    public bool HasKitchenObject() {
+        return kitchenObject != null;
+    }
+
+    public KitchenObject GetKitchenObject() {
+        return kitchenObject;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject) {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public Transform GetSpamPoint() {
+        return spamPoint;
     }
 }

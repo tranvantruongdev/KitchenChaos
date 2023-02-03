@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counterVisual: {fileID: 6852694922327565079}
   kitchenObj: {fileID: 11400000, guid: cd60b304ffbcd6840a645c0fead49856, type: 2}
-  tomatoSpamPoint: {fileID: 610372195354582214}
+  objSpamPoint: {fileID: 610372195354582214}
 --- !u!1 &9000897040986071421
 GameObject:
   m_ObjectHideFlags: 0
