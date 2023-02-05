@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c8b865ba32766439f1178b86560b1e, type: 3}
   m_Name: CheeseBlock-ChesseSlice
   m_EditorClassIdentifier: 
-  from: {fileID: 0}
-  to: {fileID: 0}
+  from: {fileID: 11400000, guid: c45d7c2ff872e5e4da7366d637911bed, type: 2}
+  to: {fileID: 11400000, guid: 0f4ff3297085b634083272f325201747, type: 2}
+  maximumProgress: 3

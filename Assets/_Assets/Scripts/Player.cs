@@ -108,8 +108,14 @@ public class Player : MonoBehaviour, IKitchenObjcectParent {
             transform.position += moveDistance * moveDir;
         }
 
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, rotationSpeed * Time.deltaTime);
         isWalking = moveDir != Vector3.zero;
+
+        if (moveDir == Vector3.zero) {
+            //prevent visual bug
+            return;
+        }
+
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, rotationSpeed * Time.deltaTime);
     }
 
     public void ClearKitchenObject() {

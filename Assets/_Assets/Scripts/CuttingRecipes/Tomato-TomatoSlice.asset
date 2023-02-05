@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   from: {fileID: 11400000, guid: cd60b304ffbcd6840a645c0fead49856, type: 2}
   to: {fileID: 11400000, guid: afd8eae0735db534a868c86fe4730476, type: 2}
+  maximumProgress: 3
