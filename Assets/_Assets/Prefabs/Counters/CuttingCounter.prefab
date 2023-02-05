@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1108541061603711404}
   - component: {fileID: 8396637638330535437}
   - component: {fileID: 5559816835548398671}
+  - component: {fileID: 5889530063512752881}
   m_Layer: 5
   m_Name: CuttingCanvas
   m_TagString: Untagged
@@ -39,7 +40,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 2.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6284807882712504966
@@ -117,6 +118,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: {fileID: 2582352879884448887}
   cuttingCounter: {fileID: 1948268333294142910}
+--- !u!114 &5889530063512752881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3672876632213976332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc50aa9b301dc646ba80d1db292a1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 2
 --- !u!1 &4720759954349833231
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +167,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 0.1}
+  m_SizeDelta: {x: 1, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1852944973742388703
 CanvasRenderer:
@@ -230,7 +244,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 0.1}
+  m_SizeDelta: {x: 1, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7711004344413763133
 CanvasRenderer:
@@ -283,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 0.02, y: -0.02}
+  m_EffectDistance: {x: 0.03, y: -0.03}
   m_UseGraphicAlpha: 1
 --- !u!1001 &302026705198734326
 PrefabInstance:
