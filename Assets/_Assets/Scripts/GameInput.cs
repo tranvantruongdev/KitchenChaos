@@ -1,8 +1,9 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class GameInput : MonoBehaviour {
     public event EventHandler OnInteractAction;
+    public event EventHandler OnInteractAltAction;
 
     private Vector2 moveDir;
     private PlayerInputAction inputActions;
@@ -13,6 +14,13 @@ public class GameInput : MonoBehaviour {
 
         inputActions.Player.Interact.Enable();
         inputActions.Player.Interact.performed += Interact_performed;
+
+        inputActions.Player.InteractAlt.Enable();
+        inputActions.Player.InteractAlt.performed += InteractAlt_performed; ;
+    }
+
+    private void InteractAlt_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnInteractAltAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {

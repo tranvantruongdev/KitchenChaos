@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, IKitchenObjcectParent {
     private Vector2 moveDir;
     private bool isWalking;
     private bool isCanMove;
+    private readonly float rotationSpeed = 10f;
     private readonly float playerHeight = 2f;
     private readonly float playerRadius = 0.7f;
     private float moveDistance;
@@ -36,13 +37,18 @@ public class Player : MonoBehaviour, IKitchenObjcectParent {
 
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAltAction += GameInput_OnInteractAltAction;
+    }
+
+    private void GameInput_OnInteractAltAction(object sender, EventArgs e) {
+        if (selectedCounter != null) {
+            selectedCounter.InteractAlt();
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
         if (selectedCounter != null) {
             selectedCounter.Interact(this);
-        } else {
-            Debug.Log("Null counter");
         }
     }
 
@@ -79,29 +85,30 @@ public class Player : MonoBehaviour, IKitchenObjcectParent {
         Vector3 moveDir = new(this.moveDir.x, 0, this.moveDir.y);
         isCanMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
 
+        //cannot move towards moveDir
         if (!isCanMove) {
-            Vector3 moveDirX = new(moveDir.x, 0, 0);
-            isCanMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            //attempt to move only on the X
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
+            isCanMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
 
             if (isCanMove) {
-                moveDir = moveDirX.normalized;
+                moveDir = moveDirX;
             } else {
-                Vector3 moveDirZ = new(0, 0, moveDir.z);
-                isCanMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                //attempt to move only on the Z
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                isCanMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
 
                 if (isCanMove) {
-                    moveDir = moveDirZ.normalized;
+                    moveDir = moveDirZ;
                 }
             }
         }
 
         if (isCanMove) {
-            transform.position += speed * Time.deltaTime * moveDir;
+            transform.position += moveDistance * moveDir;
         }
 
-        float rotationSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotationSpeed * Time.deltaTime);
-
         isWalking = moveDir != Vector3.zero;
     }
 
