@@ -100,7 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objSpamPoint: {fileID: 885372904339916592}
-  kitchenObjSO: {fileID: 11400000, guid: afd8eae0735db534a868c86fe4730476, type: 2}
+  cuttingRecipeSOArr:
+  - {fileID: 11400000, guid: a88795af70009314ea3fc761516dc99b, type: 2}
+  - {fileID: 11400000, guid: faaa7b8b0b5e51b4f9c47b99d7805021, type: 2}
+  - {fileID: 11400000, guid: 4a42412631fd8b649bfb1aa4d7a2d191, type: 2}
 --- !u!114 &3315485065514425555
 MonoBehaviour:
   m_ObjectHideFlags: 0
