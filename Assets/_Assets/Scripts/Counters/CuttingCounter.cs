@@ -1,55 +1,68 @@
 using System;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter {
-    public event EventHandler<CuttingProgressArgs> OnCuttingProgressChanged;
-    public class CuttingProgressArgs : EventArgs {
-        public float progress;
-    }
-
+public class CuttingCounter : BaseCounter, IHasProgress
+{
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArr;
+
+    public event EventHandler<IHasProgress.ProgressArgs> OnProgressChanged;
 
     private int cuttingProgress;
 
-    public override void Interact(Player player) {
-        if (!HasKitchenObject()) {
+    public override void Interact(Player player)
+    {
+        if (!HasKitchenObject())
+        {
             //there is no kitchen object on this counter
-            if (player.HasKitchenObject()) {
+            if (player.HasKitchenObject())
+            {
                 //player is carrying invalid kitchen object
                 var recipe = GetOutputFromInput(player.GetKitchenObject().KitchenObjectSO);
-                if (recipe == null) {
+                if (recipe == null)
+                {
                     return;
                 }
 
                 //place kitchen object on this counter
                 player.GetKitchenObject().SetKitchenObjcectParent(this);
-            } else {
+            }
+            else
+            {
                 //player has nothing to give
             }
-        } else {
-            if (player.HasKitchenObject()) {
+        }
+        else
+        {
+            if (player.HasKitchenObject())
+            {
                 //player is carring kitchen object
-            } else {
+            }
+            else
+            {
                 //only give kitchen object to player when he doesnt hold anything
                 GetKitchenObject().SetKitchenObjcectParent(player);
             }
         }
     }
 
-    public override void InteractAlt() {
-        if (HasKitchenObject()) {
+    public override void InteractAlt()
+    {
+        if (HasKitchenObject())
+        {
             //there is kitchen object on this counter
             KitchenObjectSO kitchenObjectSO = GetKitchenObject().KitchenObjectSO;
             var recipe = GetOutputFromInput(kitchenObjectSO);
-            if (recipe == null) {
+            if (recipe == null)
+            {
                 return;
             }
 
             cuttingProgress++;
             int maximumProgress = GetOutputSOFromInput(kitchenObjectSO).maximumProgress;
-            OnCuttingProgressChanged?.Invoke(this, new CuttingProgressArgs { progress = (float)cuttingProgress / maximumProgress });
+            OnProgressChanged?.Invoke(this, new IHasProgress.ProgressArgs { progress = (float)cuttingProgress / maximumProgress });
             //havent done cutting yet
-            if (cuttingProgress < maximumProgress) {
+            if (cuttingProgress < maximumProgress)
+            {
                 return;
             }
 
@@ -57,13 +70,16 @@ public class CuttingCounter : BaseCounter {
             KitchenObject.CreateKitchenObject(recipe, this);
             //reset progress
             cuttingProgress = 0;
-            OnCuttingProgressChanged?.Invoke(this, new CuttingProgressArgs { progress = 0 });
+            OnProgressChanged?.Invoke(this, new IHasProgress.ProgressArgs { progress = 0 });
         }
     }
 
-    private KitchenObjectSO GetOutputFromInput(KitchenObjectSO kitchenObjectSO) {
-        foreach (var recipe in cuttingRecipeSOArr) {
-            if (recipe.from == kitchenObjectSO) {
+    private KitchenObjectSO GetOutputFromInput(KitchenObjectSO kitchenObjectSO)
+    {
+        foreach (var recipe in cuttingRecipeSOArr)
+        {
+            if (recipe.from == kitchenObjectSO)
+            {
                 return recipe.to;
             }
         }
@@ -71,9 +87,12 @@ public class CuttingCounter : BaseCounter {
         return null;
     }
 
-    private CuttingRecipeSO GetOutputSOFromInput(KitchenObjectSO kitchenObjectSO) {
-        foreach (var recipe in cuttingRecipeSOArr) {
-            if (recipe.from == kitchenObjectSO) {
+    private CuttingRecipeSO GetOutputSOFromInput(KitchenObjectSO kitchenObjectSO)
+    {
+        foreach (var recipe in cuttingRecipeSOArr)
+        {
+            if (recipe.from == kitchenObjectSO)
+            {
                 return recipe;
             }
         }

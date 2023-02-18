@@ -8,7 +8,7 @@ public class CuttingCounterVisual : MonoBehaviour {
 
     // Start is called before the first frame update
     private void Start() {
-        cuttingCounter.OnCuttingProgressChanged += ContainerCounter_OnCuttingProgressChanged;
+        cuttingCounter.OnProgressChanged += ContainerCounter_OnCuttingProgressChanged;
     }
 
     private void ContainerCounter_OnCuttingProgressChanged(object sender, System.EventArgs e) {
