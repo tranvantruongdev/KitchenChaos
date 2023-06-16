@@ -132,7 +132,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                 //player is carring kitchen object
                 if (player.GetKitchenObject().TryGetKitchenObjOfType(out PlateKitchenObject plate))
                 {
-                    if (plate.TryAddIngridient(GetKitchenObject().KitchenObjectSO))
+                    if (plate.TryAddIngredient(GetKitchenObject().KitchenObjectSO))
                     {
                         GetKitchenObject().DestroySelf();
 

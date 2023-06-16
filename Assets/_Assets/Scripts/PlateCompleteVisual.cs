@@ -16,10 +16,10 @@ public class PlateCompleteVisual : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        plate.OnIngridentAdded += Plate_OnIngridentAdded;
+        plate.OnIngredientAdded += Plate_OnIngridentAdded;
     }
 
-    private void Plate_OnIngridentAdded(object sender, PlateKitchenObject.OnIngridentAddedArgs e)
+    private void Plate_OnIngridentAdded(object sender, PlateKitchenObject.OnIngredientAddedArgs e)
     {
         foreach (var obj in kitchenObjects)
         {

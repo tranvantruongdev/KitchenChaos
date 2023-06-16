@@ -22,7 +22,7 @@ public class ClearCounter : BaseCounter
                 //player is carring kitchen object
                 if (player.GetKitchenObject().TryGetKitchenObjOfType(out PlateKitchenObject plate))
                 {
-                    if (plate.TryAddIngridient(GetKitchenObject().KitchenObjectSO))
+                    if (plate.TryAddIngredient(GetKitchenObject().KitchenObjectSO))
                     {
                         GetKitchenObject().DestroySelf();
                     }
@@ -30,7 +30,7 @@ public class ClearCounter : BaseCounter
                 else if (GetKitchenObject().TryGetKitchenObjOfType(out plate))
                 {
                     //There is a plate on this counter
-                    if (plate.TryAddIngridient(player.GetKitchenObject().KitchenObjectSO))
+                    if (plate.TryAddIngredient(player.GetKitchenObject().KitchenObjectSO))
                     {
                         player.GetKitchenObject().DestroySelf();
                     }

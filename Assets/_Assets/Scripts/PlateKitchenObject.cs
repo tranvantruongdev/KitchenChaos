@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class PlateKitchenObject : KitchenObject
 {
-    public event EventHandler<OnIngridentAddedArgs> OnIngridentAdded;
+    public event EventHandler<OnIngredientAddedArgs> OnIngredientAdded;
 
-    public class OnIngridentAddedArgs : EventArgs
+    public class OnIngredientAddedArgs : EventArgs
     {
         public KitchenObjectSO KitchenObjectSO;
     }
@@ -14,11 +14,11 @@ public class PlateKitchenObject : KitchenObject
 
     private readonly List<KitchenObjectSO> _kitchenObjects = new();
 
-    public bool TryAddIngridient(KitchenObjectSO obj)
+    public bool TryAddIngredient(KitchenObjectSO obj)
     {
         if (!_validKitchenObjects.Contains(obj))
         {
-            //Not valid ingrident
+            //Not valid ingredient
             return false;
         }
 
@@ -29,7 +29,7 @@ public class PlateKitchenObject : KitchenObject
         }
         else
         {
-            OnIngridentAdded?.Invoke(this, new OnIngridentAddedArgs
+            OnIngredientAdded?.Invoke(this, new OnIngredientAddedArgs
             {
                 KitchenObjectSO = obj
             });

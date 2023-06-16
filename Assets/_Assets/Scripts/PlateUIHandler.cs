@@ -11,15 +11,15 @@ public class PlateUIHandler : MonoBehaviour
 
     private void Start()
     {
-        _plateKitchenObject.OnIngridentAdded += PlateKitchenObject_OnIngredientAdded;
+        _plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
     }
 
     private void OnDestroy()
     {
-        _plateKitchenObject.OnIngridentAdded -= PlateKitchenObject_OnIngredientAdded;
+        _plateKitchenObject.OnIngredientAdded -= PlateKitchenObject_OnIngredientAdded;
     }
 
-    private void PlateKitchenObject_OnIngredientAdded(object sender, PlateKitchenObject.OnIngridentAddedArgs e)
+    private void PlateKitchenObject_OnIngredientAdded(object sender, PlateKitchenObject.OnIngredientAddedArgs e)
     {
         UpdateUI(e.KitchenObjectSO);
     }
