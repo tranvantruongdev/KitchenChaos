@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour, IKitchenObjcectParent {
+public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
     [SerializeField] private Transform objSpamPoint;
 
     private KitchenObject kitchenObject;

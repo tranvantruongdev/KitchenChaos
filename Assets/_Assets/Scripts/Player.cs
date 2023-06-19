@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IKitchenObjcectParent {
+public class Player : MonoBehaviour, IKitchenObjectParent {
     public static Player Instance { get; private set; }
 
     [SerializeField] private float speed = 7f;

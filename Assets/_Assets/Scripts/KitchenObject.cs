@@ -4,11 +4,11 @@ public class KitchenObject : MonoBehaviour
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
-    private IKitchenObjcectParent kitchenObjectParent;
+    private IKitchenObjectParent kitchenObjectParent;
 
     public KitchenObjectSO KitchenObjectSO { get => kitchenObjectSO; }
 
-    public void SetKitchenObjcectParent(IKitchenObjcectParent kitchenObjectParent)
+    public void SetKitchenObjcectParent(IKitchenObjectParent kitchenObjectParent)
     {
         this.kitchenObjectParent?.ClearKitchenObject();
 
@@ -31,7 +31,7 @@ public class KitchenObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public static KitchenObject CreateKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjcectParent kitchenObjcectParent)
+    public static KitchenObject CreateKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjcectParent)
     {
         KitchenObject kitchenObject = Instantiate(kitchenObjectSO.prefab).GetComponent<KitchenObject>();
         kitchenObject.SetKitchenObjcectParent(kitchenObjcectParent);
