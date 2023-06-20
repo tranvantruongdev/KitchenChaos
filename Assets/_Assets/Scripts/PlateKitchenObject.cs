@@ -12,7 +12,9 @@ public class PlateKitchenObject : KitchenObject
 
     [UnityEngine.SerializeField] private List<KitchenObjectSO> _validKitchenObjects = new();
 
-    private readonly List<KitchenObjectSO> _kitchenObjects = new();
+    private readonly List<KitchenObjectSO> _lsKitchenObject = new();
+
+    public List<KitchenObjectSO> LsKitchenObject => _lsKitchenObject;
 
     public bool TryAddIngredient(KitchenObjectSO obj)
     {
@@ -22,7 +24,7 @@ public class PlateKitchenObject : KitchenObject
             return false;
         }
 
-        if (_kitchenObjects.Contains(obj))
+        if (_lsKitchenObject.Contains(obj))
         {
             //Already has this type of kitchen obj
             return false;
@@ -34,7 +36,7 @@ public class PlateKitchenObject : KitchenObject
                 KitchenObjectSO = obj
             });
 
-            _kitchenObjects.Add(obj);
+            _lsKitchenObject.Add(obj);
             return true;
         }
     }

@@ -9,9 +9,12 @@ public class DeliveryCounter : BaseCounter
             return;
         }
 
-        if (player.GetKitchenObject().TryGetKitchenObjOfType(out PlateKitchenObject _))
+        if (!player.GetKitchenObject().TryGetKitchenObjOfType(out PlateKitchenObject plate))
         {
-            player.GetKitchenObject().DestroySelf();
+            return;
         }
+
+        DeliveryManager.instance.DeliverPlate(plate);
+        player.GetKitchenObject().DestroySelf();
     }
 }

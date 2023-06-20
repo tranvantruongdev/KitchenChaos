@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4609b0449fce3047bb6fddfc0134e93, type: 3}
+  m_Name: Delivery Recipe List SO
+  m_EditorClassIdentifier: 
+  LsDeliveryRecipeSO:
+  - {fileID: 11400000, guid: 66f3a44d6c1439c41b3e4142eecd655d, type: 2}
+  - {fileID: 11400000, guid: 86c0d5d839896db44a932713aad5a699, type: 2}
+  - {fileID: 11400000, guid: 9b88afa1f8b3fd749a48572cb5843877, type: 2}
+  - {fileID: 11400000, guid: a5ff3ce2dd8ca7440b17b0c0c4181f46, type: 2}
