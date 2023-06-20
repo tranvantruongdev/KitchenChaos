@@ -14,7 +14,7 @@ public class DeliveryCounter : BaseCounter
             return;
         }
 
-        DeliveryManager.instance.DeliverPlate(plate);
+        DeliveryManager.S_Instance.DeliverPlate(plate);
         player.GetKitchenObject().DestroySelf();
     }
 }

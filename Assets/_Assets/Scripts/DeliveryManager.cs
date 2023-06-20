@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
-    public static DeliveryManager instance;
+    public static DeliveryManager S_Instance;
 
     [SerializeField] private DeliveryRecipeListSO _deliveryRecipeListSO;
     [SerializeField] private int _maxRequiredRecipe = 4;
@@ -15,7 +15,7 @@ public class DeliveryManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        instance = this;
+        S_Instance = this;
         _lsDeliveryRecipeSO = new List<DeliveryRecipeSO>();
         _timer = _interval;
     }
