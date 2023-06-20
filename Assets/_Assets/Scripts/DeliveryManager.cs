@@ -5,6 +5,11 @@ public class DeliveryManager : MonoBehaviour
 {
     public static DeliveryManager S_Instance;
 
+    public event System.EventHandler OnOderAdded;
+    public event System.EventHandler OnOderDeliver;
+
+    public List<DeliveryRecipeSO> LsDeliveryRecipeSO { get => _lsDeliveryRecipeSO; }
+
     [SerializeField] private DeliveryRecipeListSO _deliveryRecipeListSO;
     [SerializeField] private int _maxRequiredRecipe = 4;
     [SerializeField] private float _interval = 4;
@@ -12,8 +17,7 @@ public class DeliveryManager : MonoBehaviour
     private List<DeliveryRecipeSO> _lsDeliveryRecipeSO;
     private float _timer;
 
-    // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         S_Instance = this;
         _lsDeliveryRecipeSO = new List<DeliveryRecipeSO>();
@@ -30,6 +34,7 @@ public class DeliveryManager : MonoBehaviour
             DeliveryRecipeSO randomRecipeSO = lsDeliveryRecipeSO[Random.Range(0, lsDeliveryRecipeSO.Count)];
             _lsDeliveryRecipeSO.Add(randomRecipeSO);
             Debug.Log(randomRecipeSO.name);
+            OnOderAdded?.Invoke(this, System.EventArgs.Empty);
         }
     }
 
@@ -43,6 +48,8 @@ public class DeliveryManager : MonoBehaviour
         {
             Debug.Log("DeliverPlate Failed");
         }
+
+        OnOderDeliver?.Invoke(this, System.EventArgs.Empty);
     }
 
     private bool HasRequiredRecipe(PlateKitchenObject plateKitchenObject)
