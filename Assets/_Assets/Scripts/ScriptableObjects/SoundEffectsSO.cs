@@ -8,4 +8,5 @@ public class SoundEffectsSO : ScriptableObject
     public AudioClip[] ArrDeliveryFailSound;
     public AudioClip[] ArrFootStepSound;
     public AudioClip[] ArrDropObjSound;
+    public AudioClip[] ArrPickupObjSound;
 }

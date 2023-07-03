@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
     [SerializeField] private Transform objSpamPoint;
+
+    public static event EventHandler OnPickupObj;
 
     private KitchenObject kitchenObject;
 
@@ -14,6 +17,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
 
     public void ClearKitchenObject() {
         kitchenObject = null;
+        OnPickupObj?.Invoke(this, EventArgs.Empty);
     }
 
     public bool HasKitchenObject() {

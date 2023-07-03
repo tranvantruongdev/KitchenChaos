@@ -12,6 +12,13 @@ public class SoundManager : MonoBehaviour
         DeliveryManager.S_Instance.OnOderDeliver += DeliveryManager_OnOderDeliver;
         Player.Instance.OnPlayerMoving += Player_OnPlayerMoving;
         Player.Instance.OnDropKitchenObj += Player_OnDropKitchenObj;
+        BaseCounter.OnPickupObj += BaseCounter_OnPickupObj;
+    }
+
+    private void BaseCounter_OnPickupObj(object sender, EventArgs e)
+    {
+        var counter = sender as BaseCounter;
+        PlaySoundAtPosition(soundEffectsSO.ArrPickupObjSound[GetRandomIndexFromArray(soundEffectsSO.ArrPickupObjSound)], counter.transform.position);
     }
 
     private void Player_OnDropKitchenObj(object sender, EventArgs e)
