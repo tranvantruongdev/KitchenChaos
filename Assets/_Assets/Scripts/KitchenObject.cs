@@ -8,7 +8,7 @@ public class KitchenObject : MonoBehaviour
 
     public KitchenObjectSO KitchenObjectSO { get => kitchenObjectSO; }
 
-    public void SetKitchenObjcectParent(IKitchenObjectParent kitchenObjectParent)
+    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
     {
         this.kitchenObjectParent?.ClearKitchenObject();
 
@@ -34,7 +34,7 @@ public class KitchenObject : MonoBehaviour
     public static KitchenObject CreateKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjcectParent)
     {
         KitchenObject kitchenObject = Instantiate(kitchenObjectSO.prefab).GetComponent<KitchenObject>();
-        kitchenObject.SetKitchenObjcectParent(kitchenObjcectParent);
+        kitchenObject.SetKitchenObjectParent(kitchenObjcectParent);
 
         return kitchenObject;
     }

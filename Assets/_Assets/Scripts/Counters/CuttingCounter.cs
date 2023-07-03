@@ -25,7 +25,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
                 }
 
                 //place kitchen object on this counter
-                player.GetKitchenObject().SetKitchenObjcectParent(this);
+                player.GetKitchenObject().SetKitchenObjectParent(this);
             }
             else
             {
@@ -48,7 +48,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
             else
             {
                 //only give kitchen object to player when he doesnt hold anything
-                GetKitchenObject().SetKitchenObjcectParent(player);
+                GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
     }

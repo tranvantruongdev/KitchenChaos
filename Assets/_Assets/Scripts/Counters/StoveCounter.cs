@@ -112,7 +112,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                 }
 
                 //place kitchen object on this counter
-                player.GetKitchenObject().SetKitchenObjcectParent(this);
+                player.GetKitchenObject().SetKitchenObjectParent(this);
                 fryingRecipeSO = GetOutputSOFromInput(kitchenObjectSO);
                 cookingState = State.Frying;
                 OnFryStateChanged?.Invoke(this, new FryStateChangedArgs
@@ -153,7 +153,7 @@ public class StoveCounter : BaseCounter, IHasProgress
             else
             {
                 //only give kitchen object to player when he doesnt hold anything
-                GetKitchenObject().SetKitchenObjcectParent(player);
+                GetKitchenObject().SetKitchenObjectParent(player);
                 cookingState = State.Idle;
                 OnFryStateChanged?.Invoke(this, new FryStateChangedArgs
                 {
