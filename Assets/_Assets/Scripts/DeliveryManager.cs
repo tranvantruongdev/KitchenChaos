@@ -8,6 +8,11 @@ public class DeliveryManager : MonoBehaviour
     public event System.EventHandler OnOderAdded;
     public event System.EventHandler OnOderDeliver;
 
+    public class DeliveryStatusArgs : System.EventArgs
+    {
+        public bool IsSuccess;
+    }
+
     public List<DeliveryRecipeSO> LsDeliveryRecipeSO { get => _lsDeliveryRecipeSO; }
 
     [SerializeField] private DeliveryRecipeListSO _deliveryRecipeListSO;
@@ -40,16 +45,18 @@ public class DeliveryManager : MonoBehaviour
 
     public void DeliverPlate(PlateKitchenObject plateKitchenObject)
     {
+        var deliveryStatusArgs = new DeliveryStatusArgs();
+
         if (HasRequiredRecipe(plateKitchenObject))
         {
-            Debug.Log("HasRequiredRecipe");
+            deliveryStatusArgs.IsSuccess = true;
         }
         else
         {
-            Debug.Log("DeliverPlate Failed");
+            deliveryStatusArgs.IsSuccess = false;
         }
 
-        OnOderDeliver?.Invoke(this, System.EventArgs.Empty);
+        OnOderDeliver?.Invoke(this, deliveryStatusArgs);
     }
 
     private bool HasRequiredRecipe(PlateKitchenObject plateKitchenObject)

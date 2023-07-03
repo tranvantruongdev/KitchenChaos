@@ -9,6 +9,13 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         CuttingCounter.OnCutting += OnCutting;
+        DeliveryManager.S_Instance.OnOderDeliver += DeliveryManager_OnOderDeliver;
+    }
+
+    private void DeliveryManager_OnOderDeliver(object sender, EventArgs e)
+    {
+        var deliveryStatusArgs = e as DeliveryManager.DeliveryStatusArgs;
+        PlaySoundAtPosition((deliveryStatusArgs.IsSuccess? soundEffectsSO.ArrDeliverySuccessSound: soundEffectsSO.ArrDeliveryFailSound)[GetRandomIndexFromArray(deliveryStatusArgs.IsSuccess? soundEffectsSO.ArrDeliverySuccessSound: soundEffectsSO.ArrDeliveryFailSound)], DeliveryManager.S_Instance.transform.position);
     }
 
     private void OnDestroy()
@@ -19,8 +26,7 @@ public class SoundManager : MonoBehaviour
     private void OnCutting(object sender, EventArgs e)
     {
         var cuttingCounter = sender as CuttingCounter;
-        AudioClip[] arrCuttingSound = soundEffectsSO.ArrCuttingSound;
-        PlaySoundAtPosition(arrCuttingSound[GetRandomIndexFromArray(arrCuttingSound)], cuttingCounter.transform.position);
+        PlaySoundAtPosition(soundEffectsSO.ArrCuttingSound[GetRandomIndexFromArray(soundEffectsSO.ArrCuttingSound)], cuttingCounter.transform.position);
     }
 
     private int GetRandomIndexFromArray(AudioClip[] arrSound)
