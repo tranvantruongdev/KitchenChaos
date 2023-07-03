@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class StoveCounter : BaseCounter, IHasProgress
 {
+    [SerializeField] private AudioSource _fryAudioSource;
+
     public event EventHandler<FryStateChangedArgs> OnFryStateChanged;
     public event EventHandler<IHasProgress.ProgressArgs> OnProgressChanged;
 
@@ -38,8 +40,6 @@ public class StoveCounter : BaseCounter, IHasProgress
         {
             switch (cookingState)
             {
-                case State.Idle:
-                    break;
                 case State.Frying:
                     timer += Time.deltaTime;
 
@@ -47,6 +47,11 @@ public class StoveCounter : BaseCounter, IHasProgress
                     {
                         progress = timer / fryingRecipeSO.maximumProgress,
                     });
+
+                    if (!_fryAudioSource.isPlaying)
+                    {
+                        _fryAudioSource.Play();
+                    }
 
                     if (timer > fryingRecipeSO.maximumProgress)
                     {
@@ -70,6 +75,11 @@ public class StoveCounter : BaseCounter, IHasProgress
                         progress = timer / burningRecipeSO.maximumProgress,
                     });
 
+                    if (!_fryAudioSource.isPlaying)
+                    {
+                        _fryAudioSource.Play();
+                    }
+
                     if (timer > burningRecipeSO.maximumProgress)
                     {
                         GetKitchenObject().DestroySelf();
@@ -88,9 +98,10 @@ public class StoveCounter : BaseCounter, IHasProgress
                         });
                     }
                     break;
+                case State.Idle:
                 case State.Burned:
-                    break;
                 default:
+                    _fryAudioSource.Stop();
                     break;
             }
         }
@@ -129,7 +140,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         {
             if (player.HasKitchenObject())
             {
-                //player is carring kitchen object
+                //player is carrying kitchen object
                 if (player.GetKitchenObject().TryGetKitchenObjOfType(out PlateKitchenObject plate))
                 {
                     if (plate.TryAddIngredient(GetKitchenObject().KitchenObjectSO))
