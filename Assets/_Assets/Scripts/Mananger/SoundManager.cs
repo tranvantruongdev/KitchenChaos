@@ -13,6 +13,13 @@ public class SoundManager : MonoBehaviour
         Player.Instance.OnPlayerMoving += Player_OnPlayerMoving;
         Player.Instance.OnDropKitchenObj += Player_OnDropKitchenObj;
         BaseCounter.OnPickupObj += BaseCounter_OnPickupObj;
+        TrashCounter.OnObjTrashed += TrashCounter_OnObjTrashed;
+    }
+
+    private void TrashCounter_OnObjTrashed(object sender, EventArgs e)
+    {
+        var counter = sender as TrashCounter;
+        PlaySoundAtPosition(soundEffectsSO.ArrTrashedObjSound[GetRandomIndexFromArray(soundEffectsSO.ArrTrashedObjSound)], counter.transform.position);
     }
 
     private void BaseCounter_OnPickupObj(object sender, EventArgs e)
