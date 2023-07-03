@@ -10,12 +10,18 @@ public class SoundManager : MonoBehaviour
     {
         CuttingCounter.OnCutting += OnCutting;
         DeliveryManager.S_Instance.OnOderDeliver += DeliveryManager_OnOderDeliver;
+        Player.Instance.OnPlayerMoving += Player_OnPlayerMoving;
+    }
+
+    private void Player_OnPlayerMoving(object sender, EventArgs e)
+    {
+        PlaySoundAtPosition(soundEffectsSO.ArrFootStepSound[GetRandomIndexFromArray(soundEffectsSO.ArrFootStepSound)], Player.Instance.transform.position);
     }
 
     private void DeliveryManager_OnOderDeliver(object sender, EventArgs e)
     {
         var deliveryStatusArgs = e as DeliveryManager.DeliveryStatusArgs;
-        PlaySoundAtPosition((deliveryStatusArgs.IsSuccess? soundEffectsSO.ArrDeliverySuccessSound: soundEffectsSO.ArrDeliveryFailSound)[GetRandomIndexFromArray(deliveryStatusArgs.IsSuccess? soundEffectsSO.ArrDeliverySuccessSound: soundEffectsSO.ArrDeliveryFailSound)], DeliveryManager.S_Instance.transform.position);
+        PlaySoundAtPosition((deliveryStatusArgs.IsSuccess ? soundEffectsSO.ArrDeliverySuccessSound : soundEffectsSO.ArrDeliveryFailSound)[GetRandomIndexFromArray(deliveryStatusArgs.IsSuccess ? soundEffectsSO.ArrDeliverySuccessSound : soundEffectsSO.ArrDeliveryFailSound)], DeliveryManager.S_Instance.transform.position);
     }
 
     private void OnDestroy()
