@@ -6,6 +6,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArr;
 
     public event EventHandler<IHasProgress.ProgressArgs> OnProgressChanged;
+    public static EventHandler OnCutting;
 
     private int cuttingProgress;
 
@@ -67,6 +68,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
             cuttingProgress++;
             int maximumProgress = GetOutputSOFromInput(kitchenObjectSO).maximumProgress;
             OnProgressChanged?.Invoke(this, new IHasProgress.ProgressArgs { progress = (float)cuttingProgress / maximumProgress });
+            OnCutting?.Invoke(this, EventArgs.Empty);
             //havent done cutting yet
             if (cuttingProgress < maximumProgress)
             {
