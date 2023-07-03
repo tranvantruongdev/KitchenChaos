@@ -11,6 +11,12 @@ public class SoundManager : MonoBehaviour
         CuttingCounter.OnCutting += OnCutting;
         DeliveryManager.S_Instance.OnOderDeliver += DeliveryManager_OnOderDeliver;
         Player.Instance.OnPlayerMoving += Player_OnPlayerMoving;
+        Player.Instance.OnDropKitchenObj += Player_OnDropKitchenObj;
+    }
+
+    private void Player_OnDropKitchenObj(object sender, EventArgs e)
+    {
+        PlaySoundAtPosition(soundEffectsSO.ArrDropObjSound[GetRandomIndexFromArray(soundEffectsSO.ArrDropObjSound)], Player.Instance.transform.position);
     }
 
     private void Player_OnPlayerMoving(object sender, EventArgs e)

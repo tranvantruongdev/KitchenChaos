@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     [SerializeField] private Transform spamPoint;
 
     public event EventHandler OnPlayerMoving;
+    public event EventHandler OnDropKitchenObj;
 
     public event EventHandler<OnSelectCounterChangedArgs> OnSelectCounterChanged;
     public class OnSelectCounterChangedArgs : EventArgs
@@ -159,6 +160,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void ClearKitchenObject()
     {
         kitchenObject = null;
+        OnDropKitchenObj?.Invoke(this, EventArgs.Empty);
     }
 
     public bool HasKitchenObject()

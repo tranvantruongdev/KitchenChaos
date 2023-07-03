@@ -27,3 +27,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b2d2893ac04fbdb44a226f4b6ea0d271, type: 3}
   - {fileID: 8300000, guid: cc97c340134faa948bcaf20fea6429c6, type: 3}
   - {fileID: 8300000, guid: 64a04bb4fa4ed5d4eac6b0a31f91843a, type: 3}
+  ArrDropObjSound:
+  - {fileID: 8300000, guid: 9c88983fa5906dc41944ec5a43b6b5c7, type: 3}
+  - {fileID: 8300000, guid: 331b82ab2c0e2b74d805124d11372c85, type: 3}
+  - {fileID: 8300000, guid: 961379cce253f794abff0d24df806b68, type: 3}
